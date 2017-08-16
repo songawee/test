@@ -34,7 +34,7 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
         
       # run build!
-      - run: yarn build
+      - run: yarn build:ci
       - store_artifacts:
           path: ~/repo/build_stats.json
 
