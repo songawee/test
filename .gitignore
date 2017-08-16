@@ -58,3 +58,4 @@ typings/
 .env
 *.pem
 build_stats.json
+lib
