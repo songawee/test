@@ -17,6 +17,10 @@ module.exports = {
       },
       sourceMap: true
     }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ["runtime"],
+      minChunks: Infinity
+    }),
     new CompressionPlugin({
       asset: "[file].gz",
       algorithm: "gzip",
