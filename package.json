@@ -1,0 +1,11 @@
+{
+  "name": "test",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "https://github.com/songawee/test.git",
+  "author": "Dennis Johnson <songawee@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "build": "echo building..."
+  }
+}
