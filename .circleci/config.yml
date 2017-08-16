@@ -35,6 +35,8 @@ jobs:
         
       # run build!
       - run: yarn build
+      - store_artifacts:
+          path: ~/repo/records.json
 
 
 
