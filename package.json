@@ -6,6 +6,12 @@
   "author": "Dennis Johnson <songawee@gmail.com>",
   "license": "MIT",
   "scripts": {
-    "build": "echo building..."
+    "build": "rm -rf lib && mkdir lib && webpack",
+    "build:ci": "node scripts/build.js"
+  },
+  "dependencies": {
+    "compression-webpack-plugin": "^1.0.0",
+    "rimraf": "^2.6.1",
+    "webpack": "^3.5.5"
   }
 }
