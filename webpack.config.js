@@ -4,7 +4,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    app: "./demo/index.js"
+    app: "./app/index.js"
   },
   output: {
     filename: "[name].[chunkhash].js",
@@ -16,6 +16,10 @@ module.exports = {
         warnings: false
       },
       sourceMap: true
+    }),
+    new webpack.optimize.CommonsChunkPlugin({
+      name: ["runtime"],
+      minChunks: Infinity
     }),
     new CompressionPlugin({
       asset: "[file].gz",
