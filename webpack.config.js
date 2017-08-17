@@ -4,7 +4,7 @@ const webpack = require("webpack");
 
 module.exports = {
   entry: {
-    app: "./demo/index.js"
+    app: "./app/index.js"
   },
   output: {
     filename: "[name].[chunkhash].js",
