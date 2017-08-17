@@ -74,38 +74,38 @@ cleanupOutput().then(() => {
         })
       );
 
-      console.log(stats.assetsByChunkName);
+      const data = {};
+      data.totalModules = stats.modules.length;
+      data.assetsByChunkName = stats.assetsByChunkName;
 
-      const data = Object.keys(stats.entrypoints).reduce(
-        (acc, val, key) => {
-          const files = stats.entrypoints[val].assets.map(entryFile => {
-            const min = fileSizes.filter(file => {
-              return (
-                file.fileName.includes(entryFile) &&
-                !file.fileName.includes(".gz")
-              );
-            });
-
-            const gzip = fileSizes.filter(file => {
-              return (
-                file.fileName.includes(entryFile) &&
-                file.fileName.includes(".gz")
-              );
-            });
-
-            return {
-              min,
-              gzip
-            };
+      data.entrypoints = Object.keys(
+        stats.entrypoints
+      ).reduce((acc, val, key) => {
+        const files = stats.entrypoints[val].assets.map(entryFile => {
+          const min = fileSizes.filter(file => {
+            return (
+              file.fileName.includes(entryFile) &&
+              !file.fileName.includes(".gz")
+            );
           });
 
-          acc.entrypoints[val] = {
-            files
+          const gzip = fileSizes.filter(file => {
+            return (
+              file.fileName.includes(entryFile) && file.fileName.includes(".gz")
+            );
+          });
+
+          return {
+            min,
+            gzip
           };
-          return acc;
-        },
-        { entrypoints: {} }
-      );
+        });
+
+        acc[val] = {
+          files
+        };
+        return acc;
+      }, {});
 
       data.buildTime = stats.time;
 
