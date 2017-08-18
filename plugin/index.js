@@ -21,9 +21,6 @@ class BuildStatsPlugin {
         return acc;
       }, {});
       const entrypoints = stats.entrypoints;
-      // console.log(assetsByChunkName);
-      // console.log(entrypoints);
-      // console.log(assets);
 
       const entrypointsOutput = Object.keys(entrypoints).reduce((acc, val) => {
         const files = entrypoints[val].assets.map(asset => {
