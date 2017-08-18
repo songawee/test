@@ -31,6 +31,7 @@ class BuildStatsPlugin {
       }, {});
 
       const output = {
+        assetsByChunkName,
         buildTime: stats.time,
         entrypoints: entrypointsOutput,
         totalModules: stats.modules.length

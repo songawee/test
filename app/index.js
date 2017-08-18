@@ -1,4 +1,2 @@
-// const moment = require("moment");
-// console.log("hai", moment().toISOString());
-
-console.log("yo");
+const cloneDeep = require("lodash.clonedeep");
+console.log(cloneDeep("foo"));
