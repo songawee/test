@@ -12,7 +12,7 @@ module.exports = {
   output: {
     filename: "[name].[chunkhash].js",
     path: path.resolve(__dirname, "./lib"),
-    chunkFilename: "[name].bundle.js"
+    chunkFilename: "[name].[chunkhash].bundle.js"
   },
   module: {
     rules: [
