@@ -10,6 +10,12 @@ class BuildStatsPlugin {
       const stats = rawStats.toJson();
 
       const assets = stats.assets;
+      const computedAssets = assets.map(asset => {
+        return {
+          fileName: asset.name,
+          size: asset.size
+        };
+      });
       const assetsByChunkName = Object.keys(
         stats.assetsByChunkName
       ).reduce((acc, val) => {
@@ -40,6 +46,7 @@ class BuildStatsPlugin {
       }, {});
 
       const output = {
+        assets: computedAssets,
         assetsByChunkName,
         buildTime: stats.time,
         entrypoints: entrypointsOutput,
