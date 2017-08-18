@@ -10,7 +10,16 @@ class BuildStatsPlugin {
       const stats = rawStats.toJson();
 
       const assets = stats.assets;
-      const assetsByChunkName = stats.assetsByChunkName;
+      const assetsByChunkName = Object.keys(
+        stats.assetsByChunkName
+      ).reduce((acc, val) => {
+        if (typeof val === "object") {
+          acc[val] = stats.assetsByChunkName[val];
+        } else {
+          acc[val] = [stats.assetsByChunkName[val]];
+        }
+        return acc;
+      }, {});
       const entrypoints = stats.entrypoints;
       // console.log(assetsByChunkName);
       // console.log(entrypoints);

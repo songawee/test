@@ -1,4 +1,4 @@
-const CompressionPlugin = require("compression-webpack-plugin");
+const ExtractTextPlugin = require("extract-text-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
 
@@ -13,7 +13,19 @@ module.exports = {
     filename: "[name].[chunkhash].js",
     path: path.resolve(__dirname, "./lib")
   },
+  module: {
+    rules: [
+      {
+        test: /\.css$/,
+        use: ExtractTextPlugin.extract({
+          fallback: "style-loader",
+          use: "css-loader"
+        })
+      }
+    ]
+  },
   plugins: [
+    new ExtractTextPlugin("styles.css"),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
