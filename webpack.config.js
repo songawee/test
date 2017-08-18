@@ -2,9 +2,12 @@ const CompressionPlugin = require("compression-webpack-plugin");
 const path = require("path");
 const webpack = require("webpack");
 
+const BuildStatsPlugin = require("./plugin");
+
 module.exports = {
   entry: {
-    app: "./app/index.js"
+    app: "./app/index.js",
+    other: "./app/other.js"
   },
   output: {
     filename: "[name].[chunkhash].js",
@@ -21,12 +24,6 @@ module.exports = {
       name: ["runtime"],
       minChunks: Infinity
     }),
-    new CompressionPlugin({
-      asset: "[file].gz",
-      algorithm: "gzip",
-      test: /\.js$/,
-      threshold: 2,
-      minRatio: 0.8
-    })
+    new BuildStatsPlugin()
   ]
 };

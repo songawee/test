@@ -62,54 +62,42 @@ const writeFile = (path, data) => {
 cleanupOutput().then(() => {
   compile(compiler)
     .then(async stats => {
-      const files = await openDir(output);
-      const fileSizes = await Promise.all(
-        files.map(async fileName => {
-          const file = await openFile(output, fileName);
-          const fileStats = await getDirStats(file);
-          return {
-            fileName,
-            size: fileStats.size
-          };
-        })
-      );
-
-      const data = {};
-      data.totalModules = stats.modules.length;
-      data.assetsByChunkName = stats.assetsByChunkName;
-
-      data.entrypoints = Object.keys(
-        stats.entrypoints
-      ).reduce((acc, val, key) => {
-        const files = stats.entrypoints[val].assets.map(entryFile => {
-          const min = fileSizes.filter(file => {
-            return (
-              file.fileName.includes(entryFile) &&
-              !file.fileName.includes(".gz")
-            );
-          });
-
-          const gzip = fileSizes.filter(file => {
-            return (
-              file.fileName.includes(entryFile) && file.fileName.includes(".gz")
-            );
-          });
-
-          return {
-            min,
-            gzip
-          };
-        });
-
-        acc[val] = {
-          files
-        };
-        return acc;
-      }, {});
-
-      data.buildTime = stats.time;
-
-      await writeFile("build_stats.json", JSON.stringify(data, null, 2));
+      // console.log(JSON.stringify(stats, null, 2));
+      // const files = await openDir(output);
+      // const fileSizes = await Promise.all(
+      //   files.map(async fileName => {
+      //     const file = await openFile(output, fileName);
+      //     const fileStats = await getDirStats(file);
+      //     return {
+      //       fileName,
+      //       size: fileStats.size
+      //     };
+      //   })
+      // );
+      // const data = {};
+      // data.totalModules = stats.modules.length;
+      // data.assetsByChunkName = stats.assetsByChunkName;
+      // data.entrypoints = Object.keys(
+      //   stats.entrypoints
+      // ).reduce((acc, val, key) => {
+      //   const files = stats.entrypoints[val].assets.map(entryFile => {
+      //     const min = fileSizes.filter(file => {
+      //       return (
+      //         file.fileName.includes(entryFile) &&
+      //         !file.fileName.includes(".gz")
+      //       );
+      //     });
+      //     return {
+      //       min
+      //     };
+      //   });
+      //   acc[val] = {
+      //     files
+      //   };
+      //   return acc;
+      // }, {});
+      // data.buildTime = stats.time;
+      // await writeFile("build_stats.json", JSON.stringify(data, null, 2));
     })
     .then(() => {
       process.exit(0);
