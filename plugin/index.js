@@ -13,7 +13,7 @@ class BuildStatsPlugin {
       const assetsByChunkName = Object.keys(
         stats.assetsByChunkName
       ).reduce((acc, val) => {
-        if (typeof val === "object") {
+        if (typeof stats.assetsByChunkName[val] === "object") {
           acc[val] = stats.assetsByChunkName[val];
         } else {
           acc[val] = [stats.assetsByChunkName[val]];

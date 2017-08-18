@@ -25,7 +25,7 @@ module.exports = {
     ]
   },
   plugins: [
-    new ExtractTextPlugin("styles.css"),
+    new ExtractTextPlugin("[contenthash].styles.css"),
     new webpack.optimize.UglifyJsPlugin({
       compress: {
         warnings: false
